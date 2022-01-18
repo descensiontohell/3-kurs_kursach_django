@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Автосервис "Подорожник"</title>
+</head>
+<body class="landing">
+	<link rel="stylesheet" href="{{ STATIC_URL }}/static/landing.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
+
+	<div class="top_bar">
+
+	</div>
+
+	<div class="banner">
+		<div class="banner_text">
+			Введите данные для входа
+		</div>
+
+		<div class="login_data">
+			<form method="POST">{% csrf_token %}
+				<input type="text" name="name" placeholder="Логин" value="{{ form.name }}">
+				<input type="text" name="password" placeholder="Пароль" value="{{ form.password }}">
+				<input class="login_button" type="submit" value="Войти">
+			</form>
+			{{ form.errors }}
+		</div>
+	</div>
+
+</body>
+<html>

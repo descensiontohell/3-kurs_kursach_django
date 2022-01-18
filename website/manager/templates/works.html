@@ -1,0 +1,102 @@
+<html>
+<head>
+	<title>Автосервис "Подорожник"</title>
+</head>
+<body class="landing">
+	<link rel="stylesheet" href="{{ STATIC_URL }}/static/landing.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}/static/works.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
+
+	<div class="top_bar">
+		<a href="http://127.0.0.1:8000/"><div class="logout_button">
+			<p class="control_text">Выйти</p>
+		</div></a>
+	</div>
+
+	<div class="controls">
+		<div class="choice_panel">
+
+			<a href="http://127.0.0.1:8000/new_customer/"><div class="pick_customer">
+				<p class="control_text">данные о клиентах</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/pending/"><div class="pick_pending">
+				<p class="control_text">запись клиента</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/finished/"><div class="pick_finished">
+				<p class="control_text">завершенные</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/bought/"><div class="pick_bought">
+				<p class="control_text">закупки</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/stock/"><div class="pick_stock">
+				<p class="control_text">запасные части</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/suppliers/"><div class="pick_suppliers">
+				<p class="control_text">поставщики</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/workers/"><div class="pick_workers">
+				<p class="control_text">сотрудники</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/cars/"><div class="pick_cars">
+				<p class="control_text">автомобили</p>
+			</div></a>
+
+			<a href="http://127.0.0.1:8000/works/"><div class="pick_works">
+				<p class="control_text">услуги</p>
+			</div></a>
+
+		</div>
+	</div>
+
+
+	<div class="main">
+		<div class="info_box">
+			<div class="add_work">
+				Добавить услугу
+				<form method="POST">{% csrf_token %}
+					<input oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" name="TYPE_NAME" placeholder="Тип работы (кузовные работы | техническое обслуживание | шиномонтаж)" value="{{ form.TYPE_NAME }}">
+					<input oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" name="WORK_NAME" placeholder="Услуга" value="{{ form.WORK_NAME }}">
+					<input oninput="let p=this.selectionStart;this.value=this.value.toUpperCase();this.setSelectionRange(p, p);" name="PART_NAME" placeholder="Необходимые запчасти" value="{{ form.PART_NAME }}">
+					<input name="WORK_COST" placeholder="Стоимость работы" value="{{ form.WORK_COST }}">
+					<input name="WARRANTY" placeholder="Гарантия (Мес)" value="{{ form.WARRANTY }}">
+					<input type="submit" value="Добавить">
+				</form>
+			</div>
+
+			
+			<div class="customer_info">
+				<table>
+					<tr>
+				    	<th>Тип работы</th>
+				    	<th>Номер услуги</th>
+				    	<th>Услуга</th>
+				    	<th>Материалы</th>
+				    	<th>Стоимость</th>
+				    	<th>Гарантия</th>
+				  	</tr>
+				  		{% for works_list in works %}
+				  		<tr>
+					    	<td>{{ works_list.TYPE_NAME }}</td>
+					    	<td>{{ works_list.WORK_ID }}</td>
+					    	<td>{{ works_list.WORK_NAME }}</td>
+					    	<td>{{ works_list.PART_NAME }}</td>
+					    	<td>{{ works_list.WORK_COST }}</td>
+					    	<td>{{ works_list.WARRANTY }}</td>
+						</tr>
+						{% endfor %}
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+<html>
